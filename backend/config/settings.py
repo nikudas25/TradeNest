@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.mysql',
         'NAME':'tradenest',
-        'USER':'tradenest_user',
-        'PASSWORD': 'TradeNest@123',
+        'USER':'root',
+        'PASSWORD': 'password',
         'HOST':'localhost',
         'PORT':'3306',
     }
