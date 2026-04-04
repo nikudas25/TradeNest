@@ -2,8 +2,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class User(AbstractUser):
-    is_seller = models.BooleanField(default=False)
-    is_buyer = models.BooleanField(default=True)
+    USER_TYPE_CHOICES = (
+    ('buyer', 'Buyer'),
+    ('seller', 'Seller'),
+    )
+
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
+    email = models.EmailField()
 
     def __str__(self):
         return self.username

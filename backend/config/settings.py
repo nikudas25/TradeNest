@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 
+import rest_framework
 from django.conf.global_settings import AUTH_USER_MODEL, MEDIA_URL
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'apps.listings',
     'apps.orders',
     'apps.payments',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +83,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE':'django.db.backends.mysql',
+        'NAME':'tradenest',
+        'USER':'tradenest_user',
+        'PASSWORD': 'TradeNest@123',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
 
@@ -103,6 +110,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
 
 # Internationalization
